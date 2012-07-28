@@ -1,40 +1,49 @@
-window.addEventListener('load', function() {
+(function() {
     "use strict";
 
-    var width = document.body.offsetWidth,
-        height = document.body.offsetHeight,
-
-        cellSize = 50,
+    var cellSize = 50,
 
         framesPerSecond = 100,
         millisecondsPerFrame = 1000 / framesPerSecond,
 
-        scene, ticker, background, foreground,
+        scene, ticker, input, background, foreground,
         player;
 
-    function pos(n) {
-        return cellSize * n;
-    }
-
-    function setup() {
-        player = foreground.Sprite(false, {
-            color: '#66f',
-            x: pos(5),
-            y: pos(3),
+    function Character(color, x, y) {
+        this.sprite = foreground.Sprite(false, {
+            color: color,
+            x: cellSize * x,
+            y: cellSize * y,
             w: cellSize,
             h: cellSize
         });
-        player.update();
+    }
+
+    Character.prototype.draw = function() {
+        this.sprite.update();
+    };
+
+    function setup() {
+        player = new Character('#66f', 5, 3);
+        player.draw();
     }
 
     function step() {
     }
 
-    scene = sjs.Scene({w: width, h: height});
-    ticker = scene.Ticker(step, {tickDuration: millisecondsPerFrame});
-    background = scene.Layer('background', {color: '#3c3'});
-    foreground = scene.Layer('foreground');
+    function createGame() {
+        var width = document.body.offsetWidth,
+            height = document.body.offsetHeight;
 
-    setup();
-    ticker.run();
-}, false);
+        scene = sjs.Scene({w: width, h: height});
+        ticker = scene.Ticker(step, {tickDuration: millisecondsPerFrame});
+        input = scene.Input();
+        background = scene.Layer('background', {color: '#3c3'});
+        foreground = scene.Layer('foreground');
+
+        setup();
+        ticker.run();
+    }
+
+    window.addEventListener('load', createGame, false);
+}());
