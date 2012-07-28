@@ -23,12 +23,29 @@
         this.sprite.update();
     };
 
+    Character.prototype.move = function(vx, vy) {
+        this.sprite.move(vx * cellSize, vy * cellSize);
+        this.draw();
+    };
+
     function setup() {
         player = new Character('#66f', 5, 3);
         player.draw();
     }
 
     function step() {
+        if (input.keyboard.up) {
+            player.move(0, -1);
+        }
+        if (input.keyboard.right) {
+            player.move(1, 0);
+        }
+        if (input.keyboard.down) {
+            player.move(0, 1);
+        }
+        if (input.keyboard.left) {
+            player.move(-1, 0);
+        }
     }
 
     function createGame() {
