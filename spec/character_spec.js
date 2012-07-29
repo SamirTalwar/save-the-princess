@@ -1,13 +1,7 @@
-var requirejs = require('requirejs');
-
-requirejs.config({
-    nodeRequire: require
-});
-
-requirejs(['../lib/character'], function(Character) {
-    describe(Character, function() {
+require(['lib/character'], function(Character) {
+    describe('Character', function() {
         it('draws itself onto the layer provided', function() {
-            var layer = createSpyObj('layer', ['Sprite']);
+            var layer = jasmine.createSpyObj('layer', ['Sprite']);
 
             new Character(layer, 'red', 8, 3);
 
