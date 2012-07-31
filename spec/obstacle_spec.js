@@ -1,7 +1,7 @@
 require(['lib/obstacle'], function (Obstacle) {
     "use strict";
 
-    describe('obstacle', function() {
+    describe('Obstacle', function() {
         var layer, sprite;
 
         beforeEach(function() {
