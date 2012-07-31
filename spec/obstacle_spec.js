@@ -20,5 +20,24 @@ require(['lib/obstacle'], function (Obstacle) {
             });
             expect(sprite.update).toHaveBeenCalled();
         });
+
+        it('gets in the way', function() {
+            var obstacle = new Obstacle(layer, 'black', {x: 6, y: 2, w: 1, h: 5});
+
+            expect(obstacle.isAt(6, 2)).toEqual(true);
+            expect(obstacle.isAt(6, 3)).toEqual(true);
+            expect(obstacle.isAt(6, 4)).toEqual(true);
+            expect(obstacle.isAt(6, 5)).toEqual(true);
+            expect(obstacle.isAt(6, 6)).toEqual(true);
+        });
+
+        it('does not always get in the way', function() {
+            var obstacle = new Obstacle(layer, 'black', {x: 6, y: 2, w: 1, h: 5});
+
+            expect(obstacle.isAt(6, 1)).toEqual(false);
+            expect(obstacle.isAt(6, 7)).toEqual(false);
+            expect(obstacle.isAt(5, 3)).toEqual(false);
+            expect(obstacle.isAt(7, 4)).toEqual(false);
+        });
     });
 });
