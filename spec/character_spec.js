@@ -1,7 +1,7 @@
 require(['lib/character'], function(Character) {
     "use strict";
 
-    var framesToMove = framesPerSecond / 2;
+    var framesToMove = framesPerSecond / 4;
 
     describe('Character', function() {
         var layer;
@@ -29,7 +29,7 @@ require(['lib/character'], function(Character) {
             });
         });
 
-        it('moves one square per half second', function() {
+        it('moves one square per quarter second', function() {
             var sprite = {
                     update: jasmine.createSpy(),
                     applyVelocity: jasmine.createSpy(),
@@ -47,7 +47,7 @@ require(['lib/character'], function(Character) {
             _(_.range(framesToMove)).each(function(i) {
                 character.update();
                 expect(sprite.xv).toEqual(0);
-                expect(sprite.yv).toEqual(1);
+                expect(sprite.yv).toEqual(2);
                 expect(sprite.applyVelocity.calls.length).toEqual(i + 1);
                 expect(sprite.update).toHaveBeenCalled();
             });
