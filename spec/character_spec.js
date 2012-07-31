@@ -102,5 +102,20 @@ require(['lib/character'], function(Character) {
             expect(sprite.x).toEqual(150);
             expect(sprite.y).toEqual(50);
         });
+
+        it('gets in the way of others', function() {
+            var sprite = {
+                    update: jasmine.createSpy(),
+                    applyVelocity: jasmine.createSpy()
+                },
+                character;
+
+            layer.Sprite.andReturn(sprite);
+
+            character = new Character(layer, '#fff', 7, 3);
+
+            expect(character.isAt(7, 3)).toBe(true);
+            expect(character.isAt(8, 3)).toBe(false);
+        });
     });
 });
