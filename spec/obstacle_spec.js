@@ -1,7 +1,9 @@
 require(['lib/obstacle'], function (Obstacle) {
+    "use strict";
+
     describe('obstacle', function() {
         var layer, sprite;
-        
+
         beforeEach(function() {
             layer = jasmine.createSpyObj('layer', ['Sprite']);
             sprite = jasmine.createSpyObj('sprite', ['update']);
