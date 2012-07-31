@@ -25,7 +25,9 @@ require(['lib/character'], function(Character) {
         it('moves one square per quarter second', function() {
             var sprite = {
                     update: jasmine.createSpy(),
-                    applyVelocity: jasmine.createSpy()
+                    applyVelocity: jasmine.createSpy(),
+                    x: 4 * cellSize,
+                    y: 5 * cellSize
                 },
                 character;
 
@@ -48,8 +50,8 @@ require(['lib/character'], function(Character) {
             var sprite = {
                     update: jasmine.createSpy(),
                     applyVelocity: jasmine.createSpy(),
-                    x: 300,
-                    y: 100
+                    x: 6 * cellSize,
+                    y: 2 * cellSize
                 },
                 character;
 
@@ -67,8 +69,38 @@ require(['lib/character'], function(Character) {
             _(_.range(framesToMove)).each(function() { character.update(); });
 
             character.update();
+            expect(sprite.x).toEqual(350);
+            expect(sprite.y).toEqual(100);
             expect(sprite.xv).toEqual(0);
             expect(sprite.yv).toEqual(0);
+        });
+
+        it('cannot change direction mid-stride', function() {
+            var sprite = {
+                    update: jasmine.createSpy(),
+                    applyVelocity: jasmine.createSpy(),
+                    x: 2 * cellSize,
+                    y: 1 * cellSize
+                },
+                character;
+
+            layer.Sprite.andReturn(sprite);
+
+            sprite.applyVelocity.andCallFake(function() {
+                sprite.x += sprite.xv;
+                sprite.y += sprite.yv;
+            });
+
+            character = new Character(layer, 'green', 2, 1);
+
+            character.move(1, 0);
+            _(_.range(framesToMove / 2)).each(function() { character.update(); });
+
+            character.move(0, -1);
+            _(_.range(framesToMove / 2)).each(function() { character.update(); });
+
+            expect(sprite.x).toEqual(150);
+            expect(sprite.y).toEqual(50);
         });
     });
 });
