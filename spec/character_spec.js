@@ -11,6 +11,8 @@ require(['lib/character'], function(Character) {
         });
 
         it('draws itself onto the layer provided', function() {
+            layer.Sprite.andReturn(jasmine.createSpyObj('sprite', ['update']));
+
             new Character(layer, 'red', 8, 3);
 
             expect(layer.Sprite).toHaveBeenCalledWith(false, {
