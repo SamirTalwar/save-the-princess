@@ -1,0 +1,26 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#scene {
+    width: 100%;
+    height: 100%;
+}
+
+#dialogue {
+    display: none;
+    position: absolute;
+    left: 50px;
+    right: 50px;
+    bottom: 50px;
+    height: 100px;
+    padding: 25px;
+    background: rgba(48, 48, 48, 0.5);
+    font-family: monospace;
+    font-size: 1.5em;
+    color: white;
+    z-index: 100;
+}
