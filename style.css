@@ -43,6 +43,7 @@ html, body {
     color: #fff;
     font-family: monospace;
     font-size: 1.25em;
+    outline: none;
     resize: none;
 }
 
