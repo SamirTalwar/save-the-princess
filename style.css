@@ -6,18 +6,54 @@ html, body {
     padding: 0;
 }
 
+#map {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
 #scene {
     width: 100%;
     height: 100%;
 }
 
-#dialogue {
+#editor {
     display: none;
     position: absolute;
-    left: 50px;
-    right: 50px;
-    bottom: 50px;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    font-family: monospace;
+    background: #333;
+    color: #fff;
+    z-index: 100;
+}
+
+#editor > textarea {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 25px;
+    padding: 25px;
+    border: 0;
+    background: #333;
+    color: #fff;
+    font-family: monospace;
+    font-size: 1.25em;
+    resize: none;
+}
+
+#dialogue {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
     height: 100px;
+    margin: 50px;
     padding: 25px;
     background: rgba(48, 48, 48, 0.5);
     font-family: monospace;
